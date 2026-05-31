@@ -1,0 +1,55 @@
+# 激活的环境配置
+spring.profiles.active: ${env_profiles:dev}
+
+server:
+  port: 8082
+
+spring:
+  application:
+    name: lawyer-crawler
+
+  # 配置虚拟线程
+  threads:
+    virtual:
+      enabled: true
+
+  # WebSocket配置
+  websocket:
+    stomp:
+      relay:
+        host: localhost
+        port: 61613
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.daniellu.lawyer.crawler: DEBUG
+    org.springframework.web: INFO
+    org.springframework.messaging: INFO
+
+# 爬虫配置
+crawler:
+  # Jsoup配置
+  jsoup:
+    timeout: 30000
+    max-retries: 3
+    retry-interval: 1000
+
+  # Playwright配置
+  playwright:
+    timeout: 60000
+    max-concurrent: 5
+    headless: true
+    slow-mo: 100
+
+  # 策略配置
+  strategy:
+    default: AUTO
+    dynamic-sites:
+      - twitter.com
+      - facebook.com
+      - instagram.com
+      - linkedin.com
+      - youtube.com
+      - github.com

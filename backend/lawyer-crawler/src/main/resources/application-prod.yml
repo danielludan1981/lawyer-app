@@ -1,0 +1,67 @@
+# 生产环境差异配置
+spring:
+  # 启用Docker Compose
+  docker:
+    compose:
+      file: docker/docker-compose.yml
+      lifecycle-management: start-only
+      enabled: true
+
+  # 数据源配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lawyer_crawler
+    username: admin
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+  # JPA配置
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate.format_sql: false
+      hibernate.boot.allow_jdbc_metadata_access: true
+      hibernate.jdbc.lob.non_contextual_creation: true
+
+  # Spring Boot 4.0+可能需要额外配置来启用H2控制台
+  springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+    api-docs:
+      path: /v3/api-docs
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.daniellu.lawyer.crawler: DEBUG
+    org.springframework.web: INFO
+    org.springframework.messaging: INFO
+
+# 爬虫配置
+crawler:
+  # Jsoup配置
+  jsoup:
+    timeout: 30000
+    max-retries: 3
+    retry-interval: 1000
+
+  # Playwright配置
+  playwright:
+    timeout: 60000
+    max-concurrent: 5
+    headless: true
+    slow-mo: 100
+
+  # 策略配置
+  strategy:
+    default: JSOUP
+    dynamic-sites:
+      - twitter.com
+      - facebook.com
+      - instagram.com
+      - linkedin.com
+      - youtube.com
+      - github.com

@@ -1,0 +1,63 @@
+spring:
+    # 数据源配置
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+  # JPA配置
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  # H2控制台配置
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # Spring Boot 4.0+可能需要额外配置来启用H2控制台
+  springdoc:
+    swagger-ui:
+      path: /swagger-ui.html
+    api-docs:
+      path: /v3/api-docs
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.daniellu.lawyer.crawler: DEBUG
+    org.springframework.web: INFO
+    org.springframework.messaging: INFO
+
+# 爬虫配置
+crawler:
+  # Jsoup配置
+  jsoup:
+    timeout: 30000
+    max-retries: 3
+    retry-interval: 1000
+
+  # Playwright配置
+  playwright:
+    timeout: 60000
+    max-concurrent: 5
+    headless: true
+    slow-mo: 100
+
+  # 策略配置
+  strategy:
+    default: JSOUP
+    dynamic-sites:
+      - twitter.com
+      - facebook.com
+      - instagram.com
+      - linkedin.com
+      - youtube.com
+      - github.com

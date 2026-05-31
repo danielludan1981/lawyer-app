@@ -1,0 +1,47 @@
+# 激活的环境配置
+spring.profiles.active: ${env_profiles:dev}
+
+# 公共配置
+spring:
+  application:
+    name: lawyer-spring-demo1
+
+  # 配置虚拟线程
+  threads:
+    virtual:
+      enabled: true
+
+# Tomcat配置
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+    virtual-threads:
+      enabled: true
+
+# Spring Security配置
+spring.security.user:
+  name: user
+  password: password
+  roles: USER
+
+# Actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.daniellu.lawyer: DEBUG
+    org.springframework.security: INFO

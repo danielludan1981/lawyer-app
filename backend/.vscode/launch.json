@@ -1,0 +1,74 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "SpringDemo1Application (dev)",
+            "request": "launch",
+            "mainClass": "com.daniellu.lawyer.springdemo1.SpringDemo1Application",
+            "projectName": "lawyer-spring-demo1",
+            "env": {
+                "env_profiles": "dev"
+            }
+        },
+        {
+            "type": "java",
+            "name": "SpringDemo1Application (prod)",
+            "request": "launch",
+            "mainClass": "com.daniellu.lawyer.springdemo1.SpringDemo1Application",
+            "projectName": "lawyer-spring-demo1",
+            "env": {
+                "env_profiles": "prod"
+            }
+        },
+        {
+            "type": "java",
+            "name": "CrawlerApplication (dev)",
+            "request": "launch",
+            "mainClass": "com.daniellu.lawyer.crawler.CrawlerApplication",
+            "projectName": "lawyer-crawler",
+            "env": {
+                "env_profiles": "dev"
+            }
+        },
+        {
+            "type": "java",
+            "name": "CrawlerApplication (prod)",
+            "request": "launch",
+            "mainClass": "com.daniellu.lawyer.crawler.CrawlerApplication",
+            "projectName": "lawyer-crawler",
+            "env": {
+                "env_profiles": "prod"
+            }
+        },
+        {
+            "type": "java",
+            "name": "ThreadPerformanceBenchmark",
+            "request": "launch",
+            "mainClass": "com.daniellu.lawyer.springdemo1.benchmark.ThreadPerformanceBenchmark",
+            "projectName": "lawyer-spring-demo1"
+        },
+        {
+            "type": "java",
+            "name": "ArticleQueryPageTest",
+            "request": "launch",
+            "mainClass": "org.junit.platform.console.ConsoleLauncher",
+            "args": [
+                "--select-class",
+                "com.daniellu.pages.ArticleQueryPageTest"
+            ],
+            "vmArgs": "-ea",
+            "projectName": "lawyer-web-test"
+        }
+    ]
+}

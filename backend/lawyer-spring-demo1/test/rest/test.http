@@ -1,0 +1,41 @@
+get http://localhost:8080/api/users
+
+###
+post http://localhost:8080/api/users
+content-type: application/json
+
+{
+    "username": "user1",
+    "password": "123456",
+    "email": "user1@example.com"
+}
+
+###
+post http://localhost:8080/api/users
+content-type: application/json
+
+{
+    "username": "user2",
+    "password": "123456",
+    "email": "user2@example.com"
+}
+
+###
+put http://localhost:8080/api/users/1
+content-type: application/json
+
+{
+    "username": "user1_updated",
+    "password": "654321",
+    "email": "user1_updated@example.com"
+}
+
+###
+put http://localhost:8080/api/users/2
+content-type: application/json
+
+{
+    "username": "user2_updated",
+    "password": "654321",
+    "email": "user2_updated@example.com"
+}

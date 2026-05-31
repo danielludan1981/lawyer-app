@@ -1,0 +1,22 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.home": "D:\\dev-tool\\Java\\jdk-25",
+    "java.jdt.ls.java.home": "D:\\dev-tool\\Java\\jdk-25",
+    "terminal.integrated.env.windows": {
+        "JAVA_HOME": "D:\\dev-tool\\Java\\jdk-25"
+        // 移除显式的PATH定义，让终端自动继承系统PATH环境变量
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-25",
+            "path": "D:\\dev-tool\\Java\\jdk-25",
+            "default": true
+        }
+    ],
+    "terminal.integrated.shellArgs.windows": [
+        "-ExecutionPolicy",
+        "Bypass"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.dependency.packagePresentation": "hierarchical"
+}

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.daniellu</groupId>
+    <artifactId>lawyer-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>lawyer-parent</name>
+    <description>律师助手项目父POM</description>
+
+    <properties>
+        <java.version>25</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Spring Boot 版本 -->
+        <spring-boot.version>4.0.1</spring-boot.version>
+
+        <!-- 工具库版本 -->
+        <lombok.version>1.18.40</lombok.version>
+        <jmh.version>1.37</jmh.version>
+        <opentelemetry.version>1.35.0</opentelemetry.version>
+
+        <!-- 数据库版本 -->
+        <h2.version>2.2.224</h2.version>
+        <postgresql.version>42.7.3</postgresql.version>
+
+        <!-- 爬虫-->
+        <jsoup.version>1.22.1</jsoup.version>
+        <playwright.version>1.57.0</playwright.version>
+
+        <!-- 插件版本 -->
+        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
+
+        <!-- Spring Retry 版本 -->
+        <!-- 一个很奇怪的问题，如果不显示指定版本，无法正常引入spring dependencies pom中的依赖版本 -->
+        <spring-retry.version>2.0.4</spring-retry.version>
+    </properties>
+
+    <!-- 默认激活的profile -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <db.driver.groupId>com.h2database</db.driver.groupId>
+                <db.driver.artifactId>h2</db.driver.artifactId>
+                <db.driver.version>${h2.version}</db.driver.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.driver.groupId>org.postgresql</db.driver.groupId>
+                <db.driver.artifactId>postgresql</db.driver.artifactId>
+                <db.driver.version>${postgresql.version}</db.driver.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 本项目通用模块 -->
+            <dependency>
+                <groupId>com.daniellu</groupId>
+                <artifactId>lawyer-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 本项目Spring通用模块 -->
+            <dependency>
+                <groupId>com.daniellu</groupId>
+                <artifactId>lawyer-spring-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 工具库 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${jmh.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${jmh.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- OpenTelemetry -->
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-api</artifactId>
+                <version>${opentelemetry.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-sdk</artifactId>
+                <version>${opentelemetry.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-exporter-otlp</artifactId>
+                <version>${opentelemetry.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.retry</groupId>
+                <artifactId>spring-retry</artifactId>
+                <version>${spring-retry.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.microsoft.playwright</groupId>
+                <artifactId>playwright</artifactId>
+                <version>${playwright.version}</version>
+            </dependency>
+
+            <!-- 数据库依赖 - 根据profile动态选择 -->
+            <dependency>
+                <groupId>${db.driver.groupId}</groupId>
+                <artifactId>${db.driver.artifactId}</artifactId>
+                <version>${db.driver.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <release>${java.version}</release>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                    <configuration>
+                        <argLine>
+                        </argLine>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <modules>
+        <module>lawyer-common</module>
+        <module>lawyer-spring-common</module>
+        <module>lawyer-crawler</module>
+        <module>lawyer-spring-demo1</module>
+        <module>lawyer-spring-demo2</module>
+        <module>lawyer-web-test</module>
+        <!-- 其他业务模块将在后续添加 -->
+    </modules>
+</project>

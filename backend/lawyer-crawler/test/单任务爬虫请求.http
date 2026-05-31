@@ -1,0 +1,238 @@
+@baseUrl = http://localhost:8082/api/crawler
+
+### 中国人大网-权威发布（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "http://www.npc.gov.cn/npc/c2/c12435",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+     "fieldSelectors": {
+        "href": "a",
+        "publishedAt": "span"
+    },
+    "listSelector": ".s_lw li",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 40
+    }
+  },
+  "metadata": {
+    "taskName": "中国人大网-权威发布",
+    "description": "最多爬取前3页内容"
+  },
+  "pagination": {
+    "urlSegments": ["/index.html", "/index_1.html", "/index_2.html"]
+  }
+}
+
+### 国务院官网-最新政策（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "https://www.gov.cn/zhengce/zuixin",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+    "fieldSelectors": {
+      "href": "a",
+      "publishedAt": "span"
+    },
+    "listSelector": ".list li h4",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 40
+    }
+  },
+  "metadata": {
+    "taskName": "国务院官网-最新政策",
+    "description": "最多爬取前3页内容"
+  },
+  "pagination": {
+    "urlSegments": ["/home.htm", "/home_1.htm", "/home_2.htm"]
+  }
+}
+
+### 国务院官网-政策解读（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "https://www.gov.cn/zhengce/jiedu",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+    "fieldSelectors": {
+        "href": "a",
+        "publishedAt": "span"
+    },
+    "listSelector": ".list li h4",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 40
+    }
+  },
+  "metadata": {
+    "taskName": "国务院官网-政策解读",
+    "description": "最多爬取前3页内容"
+  },
+  "pagination": {
+    "urlSegments": ["/index.htm"]
+  }
+}
+
+### 查询任务状态
+GET {{baseUrl}}/tasks/80880e1f-42ab-40e6-88f0-873614135b24
+
+### 最高人民法院官网-权威发布（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "https://www.court.gov.cn/fabu.html",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+      "fieldSelectors": {
+        "href": "a",
+        "publishedAt": "i"
+    },
+    "listSelector": ".sec_list li",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 10
+    }
+  },
+  "metadata": {
+    "taskName": "最高人民法院-权威发布",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 人民法院报-法答网（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "https://www.rmfyb.com/search.html?wd=%E6%B3%95%E7%AD%94%E7%BD%91",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+    "fieldSelectors": {
+      "title": ".item_title",
+      "summary": ".item_content",
+      "link": ".item_link"
+    },
+    "listSelector": ".search_content a",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 20
+    }
+  },
+  "metadata": {
+    "taskName": "人民法院报-法答网",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 国务院国资委官网-政策发布（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "http://www.sasac.gov.cn/n2588035/n2588320/n2588335/index.html",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+     "fieldSelectors": {
+      "href": "a",
+      "publishedAt": "span"
+    },
+    "listSelector": ".zsy_conlist li",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 30
+    }
+  },
+  "metadata": {
+    "taskName": "人民法院报-法答网",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 国务院国资委官网-政策解读（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "http://www.sasac.gov.cn/n2588035/n2588320/n2588340/index.html",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+     "fieldSelectors": {
+      "href": "a",
+      "publishedAt": "span"
+    },
+    "listSelector": ".zsy_conlist li",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 30
+    }
+  },
+  "metadata": {
+    "taskName": "人民法院报-法答网",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 上海市国资委官网-信息公开（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "https://www.gzw.sh.gov.cn/shgzw_xxgk/",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+     "fieldSelectors": {
+      "href": "a",
+      "publishedAt": "span.time"
+    },
+    "listSelector": ".tab-content li",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 40
+    }
+  },
+  "metadata": {
+    "taskName": "人民法院报-法答网",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 国务院国资委官网-互动交流（调试OK）
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "url": "http://www.sasac.gov.cn/hdjl_index.html",
+  "strategy": "JSOUP",
+  "selectorConfig": {
+     "fieldSelectors": {
+      "href": "a",
+      "publishedAt": "span"
+    },
+    "listSelector": ".wrz-five-box dl",
+    "selectorType": "CSS",
+    "metadata": {
+      "publishedInDays": 100
+    }
+  },
+  "metadata": {
+    "taskName": "国务院国资委官网-互动交流",
+    "description": "只爬取第一页内容"
+  }
+}
+
+### 查询任务状态
+GET {{baseUrl}}/tasks/c7ac3969-bb11-4aec-b66d-8bafba05b12f
+### 查询任务状态
+GET {{baseUrl}}/tasks/1af5be27-ac76-4f6d-9f70-6436e361757b
+
+###
+DELETE {{baseUrl}}/tasks/{taskId}

@@ -1,0 +1,186 @@
+@baseUrl = http://localhost:8082/api/crawler
+
+### 创建聚合法规内容爬虫任务
+POST {{baseUrl}}/aggregationTasks
+Content-Type: application/json
+
+{
+  "crawlRequests": [
+    {
+      "url": "http://www.npc.gov.cn/npc/c2/c12435",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+         "fieldSelectors": {
+            "href": "a",
+            "publishedAt": "span"
+        },
+        "listSelector": ".s_lw li",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "中国人大网-权威发布",
+        "description": "最多爬取前3页内容"
+      },
+      "pagination": {
+        "urlSegments": ["/index.html", "/index_1.html", "/index_2.html"]
+      }
+    },
+    {
+      "url": "https://www.gov.cn/zhengce/zuixin",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+        "fieldSelectors": {
+          "href": "a",
+          "publishedAt": "span"
+        },
+        "listSelector": ".list li h4",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "国务院官网-最新政策",
+        "description": "最多爬取前3页内容"
+      },
+      "pagination": {
+        "urlSegments": ["/home.htm", "/home_1.htm", "/home_2.htm"]
+      }
+    },
+    {
+      "url": "https://www.gov.cn/zhengce/jiedu",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+        "fieldSelectors": {
+            "href": "a",
+            "publishedAt": "span"
+        },
+        "listSelector": ".list li h4",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "国务院官网-政策解读",
+        "description": "最多爬取前3页内容"
+      },
+      "pagination": {
+        "urlSegments": ["/home.htm", "/home_1.htm", "/home_2.htm"]
+      }
+    },
+    {
+      "url": "https://www.court.gov.cn/fabu.html",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+          "fieldSelectors": {
+            "href": "a",
+            "publishedAt": "i"
+        },
+        "listSelector": ".sec_list li",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "最高人民法院-权威发布",
+        "description": "只爬取第一页内容"
+      }
+    },
+    {
+      "url": "https://www.rmfyb.com/search.html?wd=%E6%B3%95%E7%AD%94%E7%BD%91",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+        "fieldSelectors": {
+          "title": ".item_title",
+          "summary": ".item_content",
+          "link": ".item_link"
+        },
+        "listSelector": ".search_content a",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "人民法院报-法答网",
+        "description": "只爬取第一页内容"
+      }
+    },
+    {
+      "url": "http://www.sasac.gov.cn/n2588035/n2588320/n2588335/index.html",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+         "fieldSelectors": {
+          "href": "a",
+          "publishedAt": "span"
+        },
+        "listSelector": ".zsy_conlist li",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "国务院国资委官网-政策发布",
+        "description": "只爬取第一页内容"
+      }
+    },
+    {
+      "url": "http://www.sasac.gov.cn/n2588035/n2588320/n2588340/index.html",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+         "fieldSelectors": {
+          "href": "a",
+          "publishedAt": "span"
+        },
+        "listSelector": ".zsy_conlist li",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "国务院国资委官网-政策解读",
+        "description": "只爬取第一页内容"
+      }
+    },
+    {
+      "url": "https://www.gzw.sh.gov.cn/shgzw_xxgk/",
+      "strategy": "JSOUP",
+      "selectorConfig": {
+         "fieldSelectors": {
+          "href": "a",
+          "publishedAt": "span.time"
+        },
+        "listSelector": ".tab-content li",
+        "selectorType": "CSS",
+        "metadata": {
+          "publishedInDays": 30
+        }
+      },
+      "metadata": {
+        "taskName": "上海市国资委官网-信息公开",
+        "description": "只爬取第一页内容"
+      }
+    }
+  ]
+}
+
+### 创建聚合法规内容爬虫任务-自定义API
+POST {{baseUrl}}/custom/aggregationTasks/govArticles
+Content-Type: application/json
+
+{
+  "publishedInDays": 30
+}
+
+### 查询聚合任务状态
+GET {{baseUrl}}/aggregationTasks/0a08ecab-1c6f-4b61-8952-df5156f1b70c
+
+### 取消聚合任务
+DELETE {{baseUrl}}/aggregationTasks/{aggregationTaskId}

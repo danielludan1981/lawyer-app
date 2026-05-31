@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    // Java & Maven 核心
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-maven",
+
+    // Spring Boot 4 全家桶
+    "vmware.vscode-boot-dev-pack",
+    "vmware.vscode-spring-boot-dashboard",
+
+    // 效率提升
+    "vscjava.vscode-lombok",
+    "sonarsource.sonarlint-vscode",
+    "usernamehw.errorlens"
+
+  ]
+}

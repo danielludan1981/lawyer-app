@@ -1,0 +1,69 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+# Maven build output
+target/
+*.jar
+*.war
+*.ear
+*.nar
+*.tar.gz
+
+# Other files and folders
+.settings/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+
+# Maven wrapper
+mvnw
+mvnw.cmd
+.mvn/
+
+# Log files
+logs/
+*.log
+
+# Environment configuration
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Test output
+*.test-result
+.test-output/
+
+# vscode
+.vscode/**
+.vscode/settings.json
